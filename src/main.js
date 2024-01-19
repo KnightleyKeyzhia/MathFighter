@@ -1,5 +1,7 @@
-import Phaser from 'phaser'
+import Phaser, { Scenes } from 'phaser'
 import MathFighterScenes from './scenes/MathFigtherScenes'
+import GameOverScene from './scenes/GameOverScene';
+scene: [MathFighterScenes, GameOverScene]
 
 const config = {
 	type: Phaser.AUTO,
