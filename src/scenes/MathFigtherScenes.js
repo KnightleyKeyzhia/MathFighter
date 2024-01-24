@@ -123,6 +123,8 @@ Phaser.Scene
         .setDepth(1)
         .setCollideWorldBounds(true)
 
+        this.createAnimation()
+
         //Button
         let start_button = this.add.image(this.gameHalfWidth,
         this.gameHalfHeight + 181, 'start-btn').setInteractive()
@@ -134,8 +136,8 @@ Phaser.Scene
 
         //overlap player-slash
         this.physics.add.overlap(
-            this.player,
             this.slash,
+            this.player,
             this.spriteHit,
             null,
             this
@@ -143,8 +145,8 @@ Phaser.Scene
 
         //overlap enemy-slash
         this.physics.add.overlap(
-            this.enemy,
             this.slash,
+            this.enemy,
             this.spriteHit,
             null,
             this
@@ -172,6 +174,7 @@ Phaser.Scene
                     4, 600)
             })
             this.playerAttack = true
+            this.score+=10
         }
         if (this.correctAnswer === undefined){
             this.player.anims.play('player-standby', true)
@@ -186,19 +189,12 @@ Phaser.Scene
             this.enemyAttack = true
         }
 
-        //membuat score + atau -
-        if(this.correctAnswer=== true && !this.playerAttack) {
-            //some codes
-            this.playerAttack = true
-            this.score+=10
-            this.scoreLabel.setText ('Score :' + this.score)
-        }
-
+        this.scoreLabel.setText ('Score :' + this.score)
+        
         if(this.startGame = true){
             this.timerLabel.setText('Timer :' + this.timer)
         }
     }
-
 
     //NO. 1 Method create animation
     createAnimation(){
@@ -390,7 +386,7 @@ Phaser.Scene
             11) //index
             .setInteractive() //clickable
             .setData('value', 'ok') //set value ok
-        }
+    }
 
     //No. 4 Method add number
     addNumber(pointer, object, event){
@@ -418,7 +414,8 @@ Phaser.Scene
             }
         }
         this.number = parseInt(this.numberArray.join(''))
-        this.resultText.setText(this.'number')
+        
+        this.resultText.setText(this.number)
         const textHalfWidth = this.resultText.width * 0.5
         this.resultText.setX(this.gameHalfWidth - textHalfWidth)
         event.stopPropagation()
@@ -459,11 +456,10 @@ Phaser.Scene
             }while(!Number.isInteger(numberA/numberB))
             this.question[0] = `${numberA} : ${numberB}` //operator :
             this.question[1] = numberA / numberB
-
-            this.questionText.setText(this.question[0])
-            const textHalfWidth = this.questionText.width * 0.5
-            this.questionText.setX(this.gameHalfWidth - textHalfWidth)
         }
+        this.questionText.setText(this.question[0])
+        const textHalfWidth = this.questionText.width * 0.5
+        this.questionText.setX(this.gameHalfWidth - textHalfWidth)
     }
 
     //No. 7 Method check answer
@@ -494,7 +490,7 @@ Phaser.Scene
         if (sprite.texture.key == 'player'){
             sprite.anims.play('player-hit', true)
         }else {
-            sprite.anims.play('player-hit', true)
+            sprite.anims.play('enemy-hit', true)
         }
         this.time.delayedCall(500, () => {
             this.playerAttack = false

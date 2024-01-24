@@ -1,7 +1,6 @@
-import Phaser, { Scenes } from 'phaser'
+import Phaser from 'phaser'
 import MathFighterScenes from './scenes/MathFigtherScenes'
-import GameOverScene from './scenes/GameOverScene';
-scene: [MathFighterScenes, GameOverScene]
+import GameOverScene from './scenes/GameOverScene'
 
 const config = {
 	type: Phaser.AUTO,
@@ -14,7 +13,7 @@ const config = {
 			gravity: { y: 200 },
 		},
 	},
-	scene: [MathFighterScenes], 
+	scene: [MathFighterScenes, GameOverScene],
 	scale: {
 		mode: Phaser.Scale.FIT,
 		autoCenter: Phaser.Scale.CENTER_BOTH

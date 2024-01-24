@@ -11,12 +11,12 @@ export default class GameOverScene extends Phaser.Scene{
     preload(){
         this.load.image('background', 'images/bg_layer1.png')
         this.load.image('gameover', 'images/gameover.png')
-        this.load.image('replay-btn', 'images/replay.png')
+        this.load.image('replay-button', 'images/replay.png')
     }
 
     create(){
         this.add.image(240, 320, 'background')
-        this.add.image(120, 160, 'gameover')
+        this.add.image(200, 160, 'gameover')
 
         this.add.text(100, 300, 'Score: ' + this.score, {
             fontSize: '32px', fill: 'black'})
